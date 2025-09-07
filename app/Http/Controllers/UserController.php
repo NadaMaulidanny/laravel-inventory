@@ -6,5 +6,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    //p
+    public function dashboard(){
+        return view ('dashboard');
+    }
 }

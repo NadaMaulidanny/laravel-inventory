@@ -8,18 +8,21 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Role
 {
-    /**
-     * Handle an incoming request.das
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
-    public function handle(Request $request, Closure $next, $role): Response
-{
-    if ($request->user()->role !== $role) {
-        return redirect('dashboard');
+    public function handle(Request $request, Closure $next, $role)
+    {
+        // Kalau role user tidak sesuai middleware
+        if ($request->user()->role !== $role) {
+            // Alihkan ke dashboard sesuai role sebenarnya
+            switch ($request->user()->role) {
+                case 'admin':
+                    return redirect()->route('admin.dashboard');
+                case 'super':
+                    return redirect()->route('superadmin.dashboard');
+                default:
+                    return redirect()->route('user.dashboard');
+            }
+        }
+
+        return $next($request);
     }
-
-    return $next($request);
-}
-
 }

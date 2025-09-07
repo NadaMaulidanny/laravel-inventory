@@ -3,12 +3,12 @@
         <div class="sidebar-logo">
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
-            <a href="/dashboard" class="logo">
-              <img src="{{ asset('assets/img/kaiadmin/logo_light.svg') }}"
+            <a href="/dashboard" style="color:white"; class="logo"> NgertiNih
+              <!-- <img src="{{ asset('kaiadmin/assets/img/kaiadmin/logo_light.svg') }}"
                 alt="navbar brand"
                 class="navbar-brand"
                 height="20"
-              />
+              /> -->
             </a>
             <div class="nav-toggle">
               <button class="btn btn-toggle toggle-sidebar">
@@ -27,18 +27,63 @@
         <div class="sidebar-wrapper scrollbar scrollbar-inner">
           <div class="sidebar-content">
             <ul class="nav nav-secondary">
-              <li class="nav-item active">
-                <a
-                  href="/dashboard"
-                  class="collapsed"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-home"></i>
-                  <p>Dashboard</p>
-                  <span class="caret"></span>
-                </a>
-                
-              </li>
+             <!-- Menu untuk Admin -->
+                @if(Auth::user()->role === 'admin')
+                    <li class="nav-item">
+                        <a href="/dashboard">
+                            <i class="fas fa-home"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/users">
+                            <i class="fas fa-users"></i>
+                            <p>Kelola User</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/laporan">
+                            <i class="fas fa-file-alt"></i>
+                            <p>Laporan</p>
+                        </a>
+                    </li>
+
+                <!-- Menu untuk Super Admin -->
+                @elseif(Auth::user()->role === 'super')
+                    <li class="nav-item">
+                        <a href="/dashboard">
+                            <i class="fas fa-home"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/managemen-pengguna">
+                            <i class="fas fa-user-shield"></i>
+                            <p>Manajemen Pengguna</p>
+                        </a>
+                    </li>
+
+                <!-- Menu untuk User -->
+                @else
+                    <li class="nav-item">
+                        <a href="/dashboard">
+                            <i class="fas fa-home"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/profile">
+                            <i class="fas fa-user"></i>
+                            <p>Profil Saya</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/aktivitas">
+                            <i class="fas fa-list"></i>
+                            <p>Aktivitas</p>
+                        </a>
+                    </li>
+                @endif
             </ul>
           </div>
         </div>

@@ -40,15 +40,14 @@
                     aria-expanded="false"
                   >
                     <div class="avatar-sm">
-                      <img
-                        src="{{ asset('assets/img/profile.jpg') }}"
-                        alt="..."
-                        class="avatar-img rounded-circle"
-                      />
+                      <img src="{{ asset('kaiadmin/assets/img/profile.jpg') }}" 
+     alt="image profile" 
+     class="avatar-img rounded">
+
                     </div>
                     <span class="profile-username">
                       <span class="op-7">Hi,</span>
-                      <span class="fw-bold">Hizrian</span>
+                      <span class="fw-bold">{{ Auth::user()->name }}</span>
                     </span>
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -56,11 +55,10 @@
                       <li>
                         <div class="user-box">
                           <div class="avatar-lg">
-                            <img
-                              src="assets/img/profile.jpg"
-                              alt="image profile"
-                              class="avatar-img rounded"
-                            />
+                            <img src="{{ asset('kaiadmin/assets/img/profile.jpg') }}" 
+     alt="image profile" 
+     class="avatar-img rounded">
+
                           </div>
                           <div class="u-text">
                             <h4>Hizrian</h4>
