@@ -50,6 +50,30 @@
         @include('header')
         <div class="container">
           <div class="page-inner">
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: '{{ session('success') }}',
+        showConfirmButton: false,
+        timer: 2000
+    });
+</script>
+@endif
+
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: '{{ session('error') }}'
+    });
+</script>
+@endif
+
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
               <div>
                 <h3 class="fw-bold mb-3">Manajemen Pengguna</h3>
@@ -57,13 +81,87 @@
               </div>
             </div>
             <div class="d-flex justify-content-end">
-  <button class="btn btn-secondary">
-    <span class="btn-label">
-      <i class="fa fa-plus"></i>
-    </span>
-    Secondary
-  </button>
+              <button class="btn btn-warning">
+                <span class="btn-label">
+                  <i class="fa fa-print"></i>
+                </span>
+                Cetak
+              </button>
+              <a href="{{ route('superadmin.addUser') }}" class="btn btn-secondary ms-2">
+                <span class="btn-label">
+                  <i class="fa fa-plus"></i>
+                </span>
+                Tambah Pengguna
+              </a>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="d-flex align-items-center">
+                      <h4 class="card-title">Daftar Pengguna</h4>
+                      
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    
+
+                    <div class="table-responsive">
+  <table
+    id="add-row"
+    class="display table table-striped table-hover"
+  >
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th style="width: 10%">Action</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </tfoot>
+    <tbody>
+      @foreach($users as $user)
+      <tr>
+        <td>{{ $user->name }}</td>
+        <td>{{ $user->email }}</td>
+        <td>
+          <span class="badge 
+            @if($user->role == 'super') bg-danger 
+            @elseif($user->role == 'admin') bg-primary 
+            @else bg-secondary @endif">
+            {{ ucfirst($user->role) }}
+          </span>
+        </td>
+        <td>
+          <div class="form-button-action">
+            <a href="#" class="btn btn-link btn-primary btn-lg" title="Edit">
+              <i class="fa fa-edit"></i>
+            </a>
+            <form action="#" method="POST" class="d-inline">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-link btn-danger" title="Remove">
+                <i class="fa fa-times"></i>
+              </button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
 </div>
+
+                  </div>
+                </div>
+              </div>
 
           </div>
         </div>

@@ -30,7 +30,10 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
 Route::middleware(['auth', 'role:super'])->group(function(){
     Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
 
-    Route::get('/managemen-pengguna', [SuperAdminController::class, 'manageUser'])->name('superadmin.manageUSer');
+    Route::get('/managemen-pengguna', [SuperAdminController::class, 'manageUser'])->name('superadmin.manageUser');
+    Route::get('/tambah-pengguna', [SuperAdminController::class, 'addUser'])->name('superadmin.addUser');
+    Route::post('/tambah-pengguna', [SuperAdminController::class, 'store'])->name('superadmin.storeUser');
+
 });
 
 

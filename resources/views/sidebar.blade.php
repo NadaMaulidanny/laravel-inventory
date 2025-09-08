@@ -3,7 +3,7 @@
         <div class="sidebar-logo">
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
-            <a href="/dashboard" style="color:white"; class="logo"> NgertiNih
+            <a href="/dashboard" style="color:white"; class="logo"> Inventory
               <!-- <img src="{{ asset('kaiadmin/assets/img/kaiadmin/logo_light.svg') }}"
                 alt="navbar brand"
                 class="navbar-brand"
