@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <title>Inventory</title>
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
@@ -38,9 +38,6 @@
         <link rel="stylesheet" href="{{ asset('kaiadmin/assets/css/plugins.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('kaiadmin/assets/css/kaiadmin.min.css') }}" />
 
-        <!-- CSS Just for demo purpose, don't include it in your project -->
-        <link rel="stylesheet" href="{{ asset('kaiadmin/assets/css/demo.css') }}" />
-
   </head>
   <body>
     <div class="wrapper">
@@ -50,119 +47,77 @@
         @include('header')
         <div class="container">
           <div class="page-inner">
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-@if(session('success'))
-<script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Berhasil!',
-        text: '{{ session('success') }}',
-        showConfirmButton: false,
-        timer: 2000
-    });
-</script>
-@endif
-
-@if(session('error'))
-<script>
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: '{{ session('error') }}'
-    });
-</script>
-@endif
-
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
               <div>
-                <h3 class="fw-bold mb-3">Manajemen Pengguna</h3>
+                <h3 class="fw-bold mb-3">Dashboard</h3>
                 <h6 class="op-7 mb-2">Selamat Datang Bos!</h6>
               </div>
             </div>
-            <div class="d-flex justify-content-end">
-              <button class="btn btn-warning">
-                <span class="btn-label">
-                  <i class="fa fa-print"></i>
-                </span>
-                Cetak
-              </button>
-              <a href="{{ route('superadmin.addUser') }}" class="btn btn-secondary ms-2">
-                <span class="btn-label">
-                  <i class="fa fa-plus"></i>
-                </span>
-                Tambah Pengguna
-              </a>
-            </div>
-            <div class="col-md-12">
-                <div class="card">
-                  <div class="card-header">
-                    <div class="d-flex align-items-center">
-                      <h4 class="card-title">Daftar Pengguna</h4>
-                      
-                    </div>
-                  </div>
+            <div class="row">
+              <div class="col-sm-6 col-md-4">
+                <div class="card card-stats card-round">
                   <div class="card-body">
-                    
-
-                    <div class="table-responsive">
-  <table
-    id="add-row"
-    class="display table table-striped table-hover"
-  >
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th style="width: 10%">Action</th>
-      </tr>
-    </thead>
-    <tfoot>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Action</th>
-      </tr>
-    </tfoot>
-    <tbody>
-      @foreach($users as $user)
-      <tr>
-        <td>{{ $user->name }}</td>
-        <td>{{ $user->email }}</td>
-        <td>
-          <span class="badge 
-            @if($user->role == 'super') bg-danger 
-            @elseif($user->role == 'admin') bg-primary 
-            @else bg-secondary @endif">
-            {{ ucfirst($user->role) }}
-          </span>
-        </td>
-        <td>
-          <div class="form-button-action">
-            <a href="#" class="btn btn-link btn-primary btn-lg" title="Edit">
-              <i class="fa fa-edit"></i>
-            </a>
-            <form action="#" method="POST" class="d-inline">
-              @csrf
-              @method('DELETE')
-              <button type="submit" class="btn btn-link btn-danger" title="Remove">
-                <i class="fa fa-times"></i>
-              </button>
-            </form>
-          </div>
-        </td>
-      </tr>
-      @endforeach
-    </tbody>
-  </table>
-</div>
-
+                    <div class="row align-items-center">
+                      <div class="col-icon">
+                        <div
+                          class="icon-big text-center icon-primary bubble-shadow-small"
+                        >
+                          <i class="fas fa-users"></i>
+                        </div>
+                      </div>
+                      <div class="col col-stats ms- ms-sm-0">
+                        <div class="numbers">
+                          <p class="card-category">Pengguna</p>
+                          <h4 class="card-title">{{$user}}</h4>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-
+              <div class="col-sm-6 col-md-4">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-icon">
+                        <div
+                          class="icon-big text-center icon-info bubble-shadow-small"
+                        >
+                          <i class="fas fa-user-check"></i>
+                        </div>
+                      </div>
+                      <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="numbers">
+                          <p class="card-category">Subscribers</p>
+                          <h4 class="card-title">1303</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-icon">
+                        <div
+                          class="icon-big text-center icon-success bubble-shadow-small"
+                        >
+                          <i class="fas fa-luggage-cart"></i>
+                        </div>
+                      </div>
+                      <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="numbers">
+                          <p class="card-category">Sales</p>
+                          <h4 class="card-title">$ 1,345</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

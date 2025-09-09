@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Inventory</title>
+    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
@@ -38,6 +38,9 @@
         <link rel="stylesheet" href="{{ asset('kaiadmin/assets/css/plugins.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('kaiadmin/assets/css/kaiadmin.min.css') }}" />
 
+        <!-- CSS Just for demo purpose, don't include it in your project -->
+        <link rel="stylesheet" href="{{ asset('kaiadmin/assets/css/demo.css') }}" />
+
   </head>
   <body>
     <div class="wrapper">
@@ -49,75 +52,101 @@
           <div class="page-inner">
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
               <div>
-                <h3 class="fw-bold mb-3">Dashboard</h3>
-                <h6 class="op-7 mb-2">Selamat Datang Bos!</h6>
+                <h3 class="fw-bold mb-3">Tambah Pengguna</h3>
+                <h6 class="op-7 mb-2"></h6>
               </div>
             </div>
+
             <div class="row">
-              <div class="col-sm-6 col-md-4">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-icon">
-                        <div
-                          class="icon-big text-center icon-primary bubble-shadow-small"
-                        >
-                          <i class="fas fa-users"></i>
-                        </div>
-                      </div>
-                      <div class="col col-stats ms- ms-sm-0">
-                        <div class="numbers">
-                          <p class="card-category">Visitors</p>
-                          <h4 class="card-title">{{$user}}</h4>
-                        </div>
-                      </div>
+              <div class="col-md-8 col-lg-12 mx-auto"> <!-- center & agak besar -->
+                <div class="card">
+                    <div class="card-header bg-secondary rounded-top">
+                      <h4 style="color:white;" class="card-title mb-0">Form Tambah Pengguna</h4>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-4">
-                <div class="card card-stats card-round">
                   <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-icon">
-                        <div
-                          class="icon-big text-center icon-info bubble-shadow-small"
-                        >
-                          <i class="fas fa-user-check"></i>
+                    <form action="{{ route('managemenUser.storeUser') }}" method="POST">
+                      @csrf
+                      <div class="row">
+                        <!-- First & Last Name -->
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="first_name">First Name</label>
+                            <input
+                              type="text"
+                              name="first_name"
+                              class="form-control"
+                              id="first_name"
+                              placeholder="First Name"
+                              required
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input
+                              type="text"
+                              name="last_name"
+                              class="form-control"
+                              id="last_name"
+                              placeholder="Last Name"
+                              required
+                            />
+                          </div>
                         </div>
                       </div>
-                      <div class="col col-stats ms-3 ms-sm-0">
-                        <div class="numbers">
-                          <p class="card-category">Subscribers</p>
-                          <h4 class="card-title">1303</h4>
-                        </div>
+
+                      <!-- Email -->
+                      <div class="form-group">
+                        <label for="email2">Email Address</label>
+                        <input
+                          type="email"
+                          name="email"
+                          class="form-control"
+                          id="email2"
+                          placeholder="Enter Email"
+                          required
+                        />
+                        <small id="emailHelp2" class="form-text text-muted">
+                          We'll never share your email with anyone else.
+                        </small>
                       </div>
+
+                      <!-- Password -->
+                      <div class="form-group">
+                        <label for="password">Password</label>
+                        <input
+                          type="password"
+                          name="password"
+                          class="form-control"
+                          id="password"
+                          placeholder="Password"
+                          required
+                        />
+                      </div>
+
+                     <select class="form-control" id="role" name="role" required>
+                        <option value="" disabled selected>Pilih Role</option>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                        <option value="super">Super Admin</option>
+                    </select>
+
+
+
+                      <!-- Action -->
+                     <div class="card-action text-end">
+                      <button type="submit" class="btn btn-success"
+                              id="alert_demo_3_3">Submit</button>
+                      <a href="{{ url()->previous() }}" class="btn btn-danger">Cancel</a>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-4">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-icon">
-                        <div
-                          class="icon-big text-center icon-success bubble-shadow-small"
-                        >
-                          <i class="fas fa-luggage-cart"></i>
-                        </div>
-                      </div>
-                      <div class="col col-stats ms-3 ms-sm-0">
-                        <div class="numbers">
-                          <p class="card-category">Sales</p>
-                          <h4 class="card-title">$ 1,345</h4>
-                        </div>
-                      </div>
-                    </div>
+
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
 

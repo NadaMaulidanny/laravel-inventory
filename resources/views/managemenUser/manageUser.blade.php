@@ -50,102 +50,120 @@
         @include('header')
         <div class="container">
           <div class="page-inner">
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+              @if(session('success'))
+              <script>
+                  Swal.fire({
+                      icon: 'success',
+                      title: 'Berhasil!',
+                      text: '{{ session('success') }}',
+                      showConfirmButton: false,
+                      timer: 2000
+                  });
+              </script>
+              @endif
+
+              @if(session('error'))
+              <script>
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: '{{ session('error') }}'
+                  });
+              </script>
+              @endif
+
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
               <div>
-                <h3 class="fw-bold mb-3">Tambah Pengguna</h3>
-                <h6 class="op-7 mb-2"></h6>
+                <h3 class="fw-bold mb-3">Manajemen Pengguna</h3>
+                <h6 class="op-7 mb-2">Selamat Datang Bos!</h6>
               </div>
             </div>
-
-            <div class="row">
-              <div class="col-md-8 col-lg-12 mx-auto"> <!-- center & agak besar -->
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-warning">
+                <span class="btn-label">
+                  <i class="fa fa-print"></i>
+                </span>
+                Cetak
+              </button>
+              <a href="{{ route('managemenUser.addUser') }}" class="btn btn-secondary ms-2">
+                <span class="btn-label">
+                  <i class="fa fa-plus"></i>
+                </span>
+                Tambah Pengguna
+              </a>
+            </div>
+            <br>
+            <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-secondary rounded-top">
-                      <h4 style="color:white;" class="card-title mb-0">Form Tambah Pengguna</h4>
+                  <div class="card-header">
+                    <div class="d-flex align-items-center">
+                      <h4 class="card-title">Daftar Pengguna</h4>
+                      
                     </div>
+                  </div>
                   <div class="card-body">
-                    <form action="{{ route('superadmin.storeUser') }}" method="POST">
-                      @csrf
-                      <div class="row">
-                        <!-- First & Last Name -->
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label for="first_name">First Name</label>
-                            <input
-                              type="text"
-                              name="first_name"
-                              class="form-control"
-                              id="first_name"
-                              placeholder="First Name"
-                              required
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label for="last_name">Last Name</label>
-                            <input
-                              type="text"
-                              name="last_name"
-                              class="form-control"
-                              id="last_name"
-                              placeholder="Last Name"
-                              required
-                            />
-                          </div>
-                        </div>
-                      </div>
+                    
 
-                      <!-- Email -->
-                      <div class="form-group">
-                        <label for="email2">Email Address</label>
-                        <input
-                          type="email"
-                          name="email"
-                          class="form-control"
-                          id="email2"
-                          placeholder="Enter Email"
-                          required
-                        />
-                        <small id="emailHelp2" class="form-text text-muted">
-                          We'll never share your email with anyone else.
-                        </small>
-                      </div>
+                    <div class="table-responsive">
+  <table
+    id="add-row"
+    class="display table table-striped table-hover"
+  >
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th style="width: 10%">Action</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </tfoot>
+    <tbody>
+      @foreach($users as $user)
+      <tr>
+        <td>{{ $user->name }}</td>
+        <td>{{ $user->email }}</td>
+        <td>
+          <span class="badge 
+            @if($user->role == 'super') bg-danger 
+            @elseif($user->role == 'admin') bg-primary 
+            @else bg-secondary @endif">
+            {{ ucfirst($user->role) }}
+          </span>
+        </td>
+        <td>
+          <div class="form-button-action">
+            <a href="{{ route('managemenUser.editUser', $user->id) }}" class="btn btn-link btn-primary btn-lg" title="Edit">
+              <i class="fa fa-edit"></i>
+            </a>
+            <form action="{{ route('managemenUser.deleteUser', $user->id) }}" method="POST" class="d-inline delete-form">
+                @csrf
+                @method('DELETE')
+                <button type="button" class="btn btn-link btn-danger btn-delete" title="Remove">
+                    <i class="fa fa-times"></i>
+                </button>
+            </form>
 
-                      <!-- Password -->
-                      <div class="form-group">
-                        <label for="password">Password</label>
-                        <input
-                          type="password"
-                          name="password"
-                          class="form-control"
-                          id="password"
-                          placeholder="Password"
-                          required
-                        />
-                      </div>
+          </div>
+        </td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+</div>
 
-                     <select class="form-control" id="role" name="role" required>
-                        <option value="" disabled selected>Pilih Role</option>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                        <option value="super">Super Admin</option>
-                    </select>
-
-
-
-                      <!-- Action -->
-                     <div class="card-action text-end">
-                      <button type="submit" class="btn btn-success"
-                              id="alert_demo_3_3">Submit</button>
-                      <a href="{{ url()->previous() }}" class="btn btn-danger">Cancel</a>
-                    </div>
-
-                    </form>
                   </div>
                 </div>
               </div>
-            </div>
 
           </div>
         </div>
@@ -180,6 +198,31 @@
       </div>
 
     </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll(".btn-delete");
+
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function (e) {
+                e.preventDefault();
+                let form = this.closest("form");
+
+                swal({
+                    title: "Apakah Anda yakin?",
+                    text: "Data pengguna ini akan dihapus permanen!",
+                    icon: "warning",
+                    buttons: ["Batal", "Ya, hapus!"],
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
+
     <!--   Core JS Files   -->
         <script src="{{ asset('kaiadmin/assets/js/core/jquery-3.7.1.min.js') }}"></script>
         <script src="{{ asset('kaiadmin/assets/js/core/popper.min.js') }}"></script>

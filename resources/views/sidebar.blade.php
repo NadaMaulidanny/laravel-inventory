@@ -30,7 +30,7 @@
              <!-- Menu untuk Admin -->
                 @if(Auth::user()->role === 'admin')
                     <li class="nav-item">
-                        <a href="/dashboard">
+                        <a href="{{route('dashboard.dashboardAdmin')}}">
                             <i class="fas fa-home"></i>
                             <p>Dashboard</p>
                         </a>
@@ -51,7 +51,7 @@
                 <!-- Menu untuk Super Admin -->
                 @elseif(Auth::user()->role === 'super')
                     <li class="nav-item">
-                        <a href="/dashboard">
+                        <a href="{{route('dashboard.dashboardSuper')}}">
                             <i class="fas fa-home"></i>
                             <p>Dashboard</p>
                         </a>
@@ -66,7 +66,7 @@
                 <!-- Menu untuk User -->
                 @else
                     <li class="nav-item">
-                        <a href="/dashboard">
+                        <a href="{{route('dashboard.dashboardUser')}}">
                             <i class="fas fa-home"></i>
                             <p>Dashboard</p>
                         </a>

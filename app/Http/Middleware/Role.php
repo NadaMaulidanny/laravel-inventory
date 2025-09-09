@@ -15,11 +15,11 @@ class Role
             // Alihkan ke dashboard sesuai role sebenarnya
             switch ($request->user()->role) {
                 case 'admin':
-                    return redirect()->route('admin.dashboard');
+                    return redirect()->route('dashboard.dashboardAdmin');
                 case 'super':
-                    return redirect()->route('superadmin.dashboard');
+                    return redirect()->route('dashboard.dashboardSuper');
                 default:
-                    return redirect()->route('user.dashboard');
+                    return redirect()->route('dashboard.dashboardUser');
             }
         }
 
