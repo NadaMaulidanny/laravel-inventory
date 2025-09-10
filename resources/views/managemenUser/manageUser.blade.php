@@ -81,7 +81,7 @@
               </div>
             </div>
             <div class="d-flex justify-content-end">
-              <button class="btn btn-warning">
+              <button data-bs-toggle="modal" data-bs-target="#modalCetak" class="btn btn-warning">
                 <span class="btn-label">
                   <i class="fa fa-print"></i>
                 </span>
@@ -97,6 +97,37 @@
             <br>
             <div class="col-md-12">
                 <div class="card">
+                  <div class="modal fade" id="modalCetak" tabindex="-1" role="dialog" aria-labelledby="modalCetakLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <form action="{{ route('laporan.cetak') }}" method="GET" target="_blank">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="modalCetakLabel">Cetak Laporan</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          
+                          <div class="modal-body">
+                            <div class="form-group">
+                              <label for="start_date">Dari Tanggal</label>
+                              <input type="date" name="start_date" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="end_date">Sampai Tanggal</label>
+                              <input type="date" name="end_date" class="form-control" required>
+                            </div>
+                          </div>
+                          
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Cetak</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+
                   <div class="card-header">
                     <div class="d-flex align-items-center">
                       <h4 class="card-title">Daftar Pengguna</h4>
