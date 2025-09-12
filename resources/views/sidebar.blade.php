@@ -62,6 +62,12 @@
                             <p>Manajemen Pengguna</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/daftar-kategori">
+                            <i class="fas fa-bars"></i>
+                            <p>Daftar Kategori</p>
+                        </a>
+                    </li>
 
                 <!-- Menu untuk User -->
                 @else

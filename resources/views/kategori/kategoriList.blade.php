@@ -76,7 +76,7 @@
 
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
               <div>
-                <h3 class="fw-bold mb-3">Manajemen Pengguna</h3>
+                <h3 class="fw-bold mb-3">Daftar Kategori</h3>
                 <h6 class="op-7 mb-2">Selamat Datang Bos!</h6>
               </div>
             </div>
@@ -87,11 +87,11 @@
                 </span>
                 Cetak
               </button>
-              <a href="{{ route('managemenUser.addUser') }}" class="btn btn-secondary ms-2">
+              <a href="{{route('kategori.kategoriAdd')}}" class="btn btn-secondary ms-2">
                 <span class="btn-label">
                   <i class="fa fa-plus"></i>
                 </span>
-                Tambah Pengguna
+                Tambah Kategori
               </a>
             </div>
             <br>
@@ -99,7 +99,7 @@
                 <div class="card">
                   <div class="modal fade" id="modalCetak" tabindex="-1" role="dialog" aria-labelledby="modalCetakLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                      <form action="{{ route('laporan.cetak') }}" method="GET" target="_blank">
+                      <form action="{{route('kategori.cetak')}}" method="GET" target="_blank">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title" id="modalCetakLabel">Cetak Laporan</h5>
@@ -130,7 +130,7 @@
 
                   <div class="card-header">
                     <div class="d-flex align-items-center">
-                      <h4 class="card-title">Daftar Pengguna</h4>
+                      <h4 class="card-title">Daftar Kategori</h4>
                       
                     </div>
                   </div>
@@ -139,58 +139,48 @@
 
                     <div class="table-responsive">
                     <table
-                      id="add-row"
-                      class="display table table-striped table-hover"
+                        id="add-row"
+                        class="display table table-striped table-hover"
                     >
-                      <thead>
+                        <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Role</th>
-                          <th style="width: 10%">Action</th>
+                            <th>Kategori</th>
+                            <th>Deskripsi</th>
+                            <th style="width: 10%">Action</th>
                         </tr>
-                      </thead>
-                      <tfoot>
+                        </thead>
+                        <tfoot>
                         <tr>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Role</th>
-                          <th>Action</th>
+                            <th>Kategori</th>
+                            <th>Deskripsi</th>
+                            <th>Action</th>
                         </tr>
-                      </tfoot>
-                      <tbody>
-                        @foreach($users as $user)
+                        </tfoot>
+                        <tbody>
+                            @foreach($kategoris as $kategori)
                         <tr>
-                          <td>{{ $user->name }}</td>
-                          <td>{{ $user->email }}</td>
-                          <td>
-                            <span class="badge 
-                              @if($user->role == 'super') bg-danger 
-                              @elseif($user->role == 'admin') bg-primary 
-                              @else bg-secondary @endif">
-                              {{ ucfirst($user->role) }}
-                            </span>
-                          </td>
-                          <td>
+                            <td>{{ $kategori->kategori }}</td>
+                            <td>{{ $kategori->deskripsi }}</td>
+                            <td>
                             <div class="form-button-action">
-                              <a href="{{ route('managemenUser.editUser', $user->id) }}" class="btn btn-link btn-primary btn-lg" title="Edit">
+                                <a href="{{route('kategori.kategoriEdit', $kategori->id)}}" class="btn btn-link btn-primary btn-lg" title="Edit">
                                 <i class="fa fa-edit"></i>
-                              </a>
-                              <form action="{{ route('managemenUser.deleteUser', $user->id) }}" method="POST" class="d-inline delete-form">
-                                  @csrf
-                                  @method('DELETE')
-                                  <button type="button" class="btn btn-link btn-danger btn-delete" title="Remove">
-                                      <i class="fa fa-times"></i>
-                                  </button>
-                              </form>
+                                </a>
+                                <form action="{{route('kategori.kategoriDelete', $kategori->id)}}" method="POST" class="d-inline delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" class="btn btn-link btn-danger btn-delete" title="Remove">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </form>
 
                             </div>
-                          </td>
+                            </td>
                         </tr>
                         @endforeach
-                      </tbody>
+                        </tbody>
                     </table>
-                  </div>
+                    </div>
 
                   </div>
                 </div>

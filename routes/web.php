@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\KategoriController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -46,6 +47,13 @@ Route::middleware(['auth', 'role:super'])->group(function(){
     Route::delete('/hapus-pengguna/{id}', [SuperAdminController::class, 'delete'])->name('managemenUser.deleteUser');
     Route::get('/laporan/cetak', [LaporanController::class, 'cetak'])->name('laporan.cetak');
 
+    Route::get('/daftar-kategori', [KategoriController::class, 'index'])->name('kategori.kategoriList');
+    Route::get('/tambah-kategori', [KategoriController::class, 'add'])->name('kategori.kategoriAdd');
+    Route::post('/tambah-kategori', [KategoriController::class, 'store'])->name('kategori.kategoriStore');
+    Route::get('/edit-kategori/{id}', [KategoriController::class, 'edit'])->name('kategori.kategoriEdit');
+    Route::put('/perbarui-kategori/{id}', [KategoriController::class, 'update'])->name('kategori.kategoriUpdate');
+    Route::delete('/hapus-kategori/{id}', [KategoriController::class, 'delete'])->name('kategori.kategoriDelete');
+    Route::get('/kategori/cetak', [LaporanController::class, 'kategori'])->name('kategori.cetak');
 });
 
 
