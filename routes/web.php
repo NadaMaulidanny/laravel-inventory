@@ -8,6 +8,7 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\BarangController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -54,6 +55,13 @@ Route::middleware(['auth', 'role:super'])->group(function(){
     Route::put('/perbarui-kategori/{id}', [KategoriController::class, 'update'])->name('kategori.kategoriUpdate');
     Route::delete('/hapus-kategori/{id}', [KategoriController::class, 'delete'])->name('kategori.kategoriDelete');
     Route::get('/kategori/cetak', [LaporanController::class, 'kategori'])->name('kategori.cetak');
+
+    Route::get('/daftar-barang', [BarangController::class, 'index'])->name('barang.barangList');
+    Route::get('/tambah-barang', [BarangController::class, 'add'])->name('barang.barangAdd');
+    Route::post('/tambah-barang', [BarangController::class, 'store'])->name('barang.barangStore');
+    Route::get('/edit-barang/{id}', [BarangController::class, 'edit'])->name('barang.barangEdit');
+    Route::put('/perbarui-barang/{id}', [BarangController::class, 'update'])->name('barang.barangUpdate');
+    Route::delete('/hapus-barang/{id}', [BarangController::class, 'delete'])->name('barang.barangDelete');
 });
 
 

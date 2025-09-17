@@ -57,15 +57,21 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/managemen-pengguna">
-                            <i class="fas fa-user-shield"></i>
-                            <p>Manajemen Pengguna</p>
+                        <a href="/daftar-kategori">
+                            <i class="fas fa-layer-group"></i>
+                            <p>Daftar Kategori</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/daftar-kategori">
-                            <i class="fas fa-bars"></i>
-                            <p>Daftar Kategori</p>
+                        <a href="/daftar-barang">
+                            <i class="fas fa-th-list"></i>
+                            <p>Daftar Barang</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/managemen-pengguna">
+                            <i class="fas fa-user-shield"></i>
+                            <p>Manajemen Pengguna</p>
                         </a>
                     </li>
 
